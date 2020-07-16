@@ -26,5 +26,6 @@
     <sly data-sly-test="${hasCloudconfigSupport}" data-sly-resource="${'cloudconfig-header' @ resourceType='cq/cloudconfig/components/scripttags/header'}"></sly>
     <sly data-sly-test="${clientLibCategoriesJsHead}" data-sly-call="${clientlib.js @ categories=clientLibCategoriesJsHead}"></sly>
     <sly data-sly-test="${clientLibCategories}" data-sly-call="${clientlib.css @ categories=clientLibCategories}"></sly>
+    <sly data-sly-test="${caconfig['com.adobe.cq.wcm.SiteConfig'].clientlib}" data-sly-call="${clientlib.css @ categories=caconfig['com.adobe.cq.wcm.SiteConfig'].clientlib}"></sly>
     <link data-sly-test="${staticDesignPath}" href="${staticDesignPath}" rel="stylesheet" type="text/css" />
 </template>
