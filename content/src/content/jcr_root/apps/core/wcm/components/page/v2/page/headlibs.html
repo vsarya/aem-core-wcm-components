@@ -22,6 +22,8 @@
         'cq.shared'
         ]
     }"></sly>
+    <link rel="stylesheet" href="/conf/friday/settings/wcm/clientlibs/theme/css/theme.css" type="text/css">
+    <script type="text/javascript" src="/conf/friday/settings/wcm/clientlibs/theme/js/theme.js"></script>
     <sly data-sly-include="/libs/cq/cloudserviceconfigs/components/servicelibs/servicelibs.jsp"></sly>
     <sly data-sly-test="${hasCloudconfigSupport}" data-sly-resource="${'cloudconfig-header' @ resourceType='cq/cloudconfig/components/scripttags/header'}"></sly>
     <sly data-sly-test="${clientLibCategoriesJsHead}" data-sly-call="${clientlib.js @ categories=clientLibCategoriesJsHead}"></sly>
