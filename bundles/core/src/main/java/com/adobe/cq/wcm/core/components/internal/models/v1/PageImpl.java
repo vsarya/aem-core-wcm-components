@@ -35,6 +35,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.caconfig.ConfigurationBuilder;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
@@ -44,6 +45,7 @@ import org.apache.sling.models.factory.ModelFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.adobe.aem.wcm.site.manager.api.ClientLibConfig;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ContainerExporter;
 import com.adobe.cq.export.json.ExporterConstants;
@@ -295,7 +297,19 @@ public class PageImpl extends AbstractComponentImpl implements Page {
                 addPolicyClientLibs(categories);
             }
         }
+        addSiteClientLibCategory(categories);
         clientLibCategories = categories.toArray(new String[categories.size()]);
+    }
+
+    private void addSiteClientLibCategory(List<String> categories) {
+        ConfigurationBuilder builder = currentPage.adaptTo(ConfigurationBuilder.class);
+        if (builder != null) {
+            ClientLibConfig clientLibConfig = builder.as(ClientLibConfig.class);
+            String siteClientlib = clientLibConfig.category();
+            if (!StringUtils.isEmpty(siteClientlib)) {
+                categories.add(siteClientlib);
+            }
+        }
     }
 
     protected void addDefaultTemplateEditorClientLib(Resource templateResource, List<String> categories) {

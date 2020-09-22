@@ -70,6 +70,7 @@
                         <Import-Package>
                             com.adobe.cq.commerce.*;resolution:=optional,
                             javax.annotation;version=0.0.0,
+                            com.adobe.aem.wcm.site.manager.api;version="[0.0,1)",
                             *
                         </Import-Package>
                     </instructions>
@@ -405,6 +406,12 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient-osgi</artifactId>
+        </dependency>
+        <dependency>
+            <artifactId>com.adobe.aem.wcm.site.manager</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
+            <groupId>com.adobe.cq</groupId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Testing dependencies -->
