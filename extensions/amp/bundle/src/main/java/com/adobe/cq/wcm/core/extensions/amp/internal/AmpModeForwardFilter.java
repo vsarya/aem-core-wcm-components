@@ -26,6 +26,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.request.RequestDispatcherOptions;
@@ -81,7 +82,10 @@ public class AmpModeForwardFilter implements Filter {
                 return;
             }
         }
-        chain.doFilter(request, response);
+        chain.doFilter(request,response);
+//        CharResponseWrapper wrapper = new CharResponseWrapper((HttpServletResponseWrapper) response);
+//        chain.doFilter(request, wrapper);
+//        System.out.println(wrapper.toString());
     }
 
     /**
