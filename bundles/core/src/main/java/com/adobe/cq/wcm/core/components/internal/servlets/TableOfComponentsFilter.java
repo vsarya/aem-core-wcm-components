@@ -58,13 +58,18 @@ public class TableOfComponentsFilter implements Filter {
 
         chain.doFilter(request, wrapper);
 
+        long  startTime = System.currentTimeMillis();
         PrintWriter responseWriter = response.getWriter();
 
         if (wrapper.getContentType().contains("text/html")) {
             CharArrayWriter charWriter = new CharArrayWriter();
             String originalContent = wrapper.toString();
 
+            long s = System.currentTimeMillis();
             Document document = Jsoup.parse(originalContent);
+            long e = System.currentTimeMillis();
+            System.out.println("Time, Jsoup, " + (e -  s));
+
             Set<String> hTags = new HashSet<>();
             hTags.add("h1");
             hTags.add("h2");
@@ -90,27 +95,28 @@ public class TableOfComponentsFilter implements Filter {
             }
             toc.append("</ol>");
 
+            s = System.currentTimeMillis();
             elements = document.getElementsByClass("tableofcomponents-placeholder");
+            e = System.currentTimeMillis();
+            System.out.println("Time, getTocByClass, " + (e -  s));
+
+            s = System.currentTimeMillis();
             for (Element element : elements) {
                 element.append(toc.toString());
             }
+            e = System.currentTimeMillis();
+            System.out.println("Time, appendingToc, " + (e -  s));
 
-//            int indexOfCloseBodyTag = originalContent.indexOf("</body>") - 1;
-//
-//            charWriter.write(originalContent.substring(0, indexOfCloseBodyTag));
-//
-//            String copyrightInfo = "<p>Copyright CodeJava.net</p>";
-////            String closeHTMLTags = "</body></html>";
-//            String closeHTMLTags = originalContent.substring(indexOfCloseBodyTag);
-//
-//            charWriter.write(copyrightInfo);
-//            charWriter.write(closeHTMLTags);
-
+            s = System.currentTimeMillis();
             charWriter.write(document.outerHtml());
             String alteredContent = charWriter.toString();
             response.setContentLength(alteredContent.length());
             responseWriter.write(alteredContent);
+            e = System.currentTimeMillis();
+            System.out.println("Time, modifyingResponse, " + (e -  s));
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time, Total, " +  (endTime - startTime));
     }
 
     @Override
