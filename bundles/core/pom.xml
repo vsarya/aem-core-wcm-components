@@ -57,6 +57,7 @@
                 <configuration>
                     <exportScr>true</exportScr>
                     <instructions>
+                        <Embed-Dependency>jsoup</Embed-Dependency>
                         <_plugin>
                             <!-- Enable registration of Sling Models classes via bnd plugin -->
                             org.apache.sling.bnd.models.ModelsScannerPlugin,
