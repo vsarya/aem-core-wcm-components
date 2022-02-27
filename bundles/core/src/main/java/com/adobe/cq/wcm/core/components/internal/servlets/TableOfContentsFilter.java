@@ -84,6 +84,7 @@ public class TableOfContentsFilter implements Filter {
                 Element tableOfContents = getTableOfContents(tocPlaceholderElement);
                 tocPlaceholderElement.empty();
                 tocPlaceholderElement.clearAttributes();
+                tocPlaceholderElement.addClass("table-of-contents");
                 if(tableOfContents != null) {
                     tocPlaceholderElement.appendChild(tableOfContents);
                     WCMMode wcmMode = WCMMode.fromRequest(request);
